@@ -38,7 +38,6 @@ The project is built using the **MERN stack**, with additional Java backend comp
 
 ### Additional Backend
 - Java
-- Spring Boot
 
 ## 📁 Project Structure
 
