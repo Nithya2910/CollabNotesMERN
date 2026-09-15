@@ -1,26 +1,28 @@
 # 📝 CollabNotes
 
-CollabNotes is a full-stack collaborative notes application that allows users to create, edit, manage, and share notes with other users.
-
-The project is built using the **MERN stack**, with additional Java backend components.
+A full-stack collaborative notes application built using the **MERN stack**.  
+CollabNotes allows users to securely create, manage, organize, upload, and share notes with other users in real time.
 
 ## 🚀 Features
 
-- 🔐 User Registration and Login
-- 📧 Email OTP Verification during signup
-- 🔑 Secure authentication using JWT
+- 🔐 User Registration & Login
+- 📧 Email OTP verification during registration
+- 🔑 JWT-based authentication
 - 📝 Create, edit, and delete notes
-- 👥 Share notes with other users using their email or username
-- 🤝 Collaborative note management
-- 📂 File upload support
+- 🗂️ Create and manage folders
+- 👥 Share notes using email or username
+- 🤝 Real-time collaborative note editing
+- 🖱️ Real-time cursor collaboration
+- 📎 Upload files and images
 - 🔍 Search and manage notes
+- 🗑️ Soft delete support
 - 📱 Responsive user interface
-- 🛡️ Environment variables for sensitive configuration
-- 💾 MongoDB database integration
+- 🔒 Secure environment variable configuration
 
-## 🛠️ Technologies Used
+## 🛠️ Tech Stack
 
 ### Frontend
+
 - React.js
 - Vite
 - JavaScript
@@ -28,27 +30,33 @@ The project is built using the **MERN stack**, with additional Java backend comp
 - CSS3
 
 ### Backend
+
 - Node.js
 - Express.js
 - MongoDB
 - Mongoose
-- JWT Authentication
+- JWT
 - Nodemailer
 - Socket.IO
+- Multer
 
-### Additional Backend
-- Java
-
-## 📁 Project Structure
+## 🏗️ Project Architecture
 
 ```text
-CollabNotesProject/
-│
-├── frontend/              # React frontend
-│
-├── backend-node/          # Node.js + Express backend
-│
-├── backend-java/          # Java backend
-│
-├── .gitignore
-└── README.md
+                    ┌──────────────────┐
+                    │   React Frontend │
+                    │     (Vite)       │
+                    └────────┬─────────┘
+                             │
+                    REST API / Socket.IO
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │  Node.js Backend │
+                    │    Express.js    │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │     MongoDB      │
+                    └──────────────────┘
