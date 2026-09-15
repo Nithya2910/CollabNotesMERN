@@ -5,7 +5,7 @@ import { authAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
 /**
- * Login page — glassmorphism card with email/password form.
+ * Login page — glassmorphism card with email/password form & unverified account assistance.
  */
 const Login = () => {
   const navigate = useNavigate();
@@ -13,19 +13,25 @@ const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [unverifiedEmail, setUnverifiedEmail] = useState('');
 
   const handleChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setUnverifiedEmail('');
     try {
       const { data } = await authAPI.login(form);
       login(data.user, data.token);
       toast.success(`Welcome back, ${data.user.username}! 👋`);
       navigate('/dashboard');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Login failed. Please try again.');
+      const msg = err.response?.data?.message || 'Login failed. Please try again.';
+      toast.error(msg);
+      if (err.response?.data?.requiresVerification) {
+        setUnverifiedEmail(form.email);
+      }
     } finally {
       setLoading(false);
     }
@@ -56,6 +62,19 @@ const Login = () => {
               Sign up free
             </Link>
           </p>
+
+          {unverifiedEmail && (
+            <div className="mb-4 p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 text-amber-800 dark:text-amber-200 text-xs">
+              <p className="font-semibold mb-1">⚠️ Email verification pending</p>
+              <p>Your account is not verified yet. Please sign up with this email or verify the OTP sent to your inbox.</p>
+              <Link
+                to="/signup"
+                className="mt-2 inline-block font-semibold text-brand-600 dark:text-brand-400 hover:underline"
+              >
+                Go to Verification & Resend OTP →
+              </Link>
+            </div>
+          )}
 
           <form id="login-form" onSubmit={handleSubmit} className="space-y-4">
             {/* Email */}

@@ -40,9 +40,11 @@ api.interceptors.response.use(
 
 // ── Auth API ──────────────────────────────────────────────────────────
 export const authAPI = {
-  signup: (data) => api.post('/api/auth/signup', data),
-  login:  (data) => api.post('/api/auth/login', data),
-  getMe:  ()     => api.get('/api/auth/me'),
+  signup:    (data) => api.post('/api/auth/signup', data),
+  verifyOtp: (data) => api.post('/api/auth/verify-otp', data),
+  resendOtp: (data) => api.post('/api/auth/resend-otp', data),
+  login:     (data) => api.post('/api/auth/login', data),
+  getMe:     ()     => api.get('/api/auth/me'),
 };
 
 // ── Notes API ─────────────────────────────────────────────────────────
